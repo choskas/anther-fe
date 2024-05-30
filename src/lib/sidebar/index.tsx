@@ -1,29 +1,35 @@
-import { AxeIcon, CircleUserIcon, ScanBarcodeIcon, UserIcon } from "lucide-react";
+import { AreaChartIcon, DownloadCloudIcon, LogOutIcon, PlaneIcon, UserIcon } from "lucide-react";
 
 export const SIDEBAR = [
   {
-    name: "Comunidades",
-    linkTo: "/dashboard/communities",
+    name: "Inicio",
+    linkTo: "/dashboard",
     roles: ["super_admin", "operative_admin"],
-    icon: <CircleUserIcon className="h-4 w-4 mr-[8px]" />
+    icon: <AreaChartIcon className="h-4 w-4 mr-[8px]" />
   },
   {
-    name: "Productos",
-    linkTo: "/dashboard/product",
+    name: "Vuelos",
+    linkTo: "/dashboard/flights",
     roles: ["super_admin", "operative_admin", "product_generator"],
-    icon:  <ScanBarcodeIcon className="h-4 w-4 mr-[8px]" />
+    icon:  <PlaneIcon className="h-4 w-4 mr-[8px]" />
   },
   {
-    name: "Permisos",
-    linkTo: "/dashboard/permissions",
+    name: "Mi cuenta",
+    linkTo: "/dashboard/profile",
     roles: ["super_admin", "operative_admin"],
     icon:  <UserIcon className="h-4 w-4 mr-[8px]" />
   },
   {
-    name: "Registro",
-    linkTo: "/dashboard/register",
+    name: "Descargas",
+    linkTo: "/dashboard/downloads",
     roles: ["super_admin"],
-    icon:  <AxeIcon className="h-4 w-4 mr-[8px]" />
+    icon:  <DownloadCloudIcon className="h-4 w-4 mr-[8px]" />
+  },
+  {
+    name: "Cerrar sesión",
+    linkTo: "/logout",
+    roles: ["super_admin", "operative_admin", "product_generator"],
+    icon:  <LogOutIcon className="h-4 w-4 mr-[8px]" />
   },
 ];
 

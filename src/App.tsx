@@ -15,9 +15,11 @@ import {
 } from "./components/ui/form";
 import { Input } from "./components/ui/input";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "./context/Auth";
 
 function App() {
   const navigate = useNavigate();
+  const { setToken } = useAuth();
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -29,16 +31,15 @@ function App() {
   function onSubmit(values: z.infer<typeof loginSchema>) {
     const {user, password} = values
     if (user === 'admin' && password === 'admin') {
-      navigate('/dashboard')
+      setToken("this is a test token");
+      navigate("/dashboard", { replace: true });
     }
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
     console.log(values);
   }
 
   return (
     <section className="dark">
-      <Card>
+      <Card className="md:w-1/2 mt-[24px] mx-auto">
         <CardHeader>
           <CardTitle className="flex justify-center">
             <img src="/assets/imgs/logo.png" alt="logo" />
