@@ -31,7 +31,7 @@ function App() {
   function onSubmit(values: z.infer<typeof loginSchema>) {
     const {user, password} = values
     if (user === 'admin' && password === 'admin') {
-      setToken("this is a test token");
+      setToken("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE3MTcwNDU2MDEsImV4cCI6MTc0ODU4MTYwMSwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.jKBmEWciNeLMiFhRtsSWC3u7e2jakAI29aownkdTs5o");
       navigate("/dashboard", { replace: true });
     }
     console.log(values);

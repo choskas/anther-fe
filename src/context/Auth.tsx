@@ -1,4 +1,5 @@
 import { axiosProtected } from "@/lib/axios";
+import {jwtDecode} from 'jwt-decode'
 import {
   Dispatch,
   SetStateAction,
@@ -7,6 +8,7 @@ import {
   useEffect,
   useState,
 } from "react";
+
 
 const AuthContext = createContext<{
   token: string | null;

@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function Dashboard() {
   const { table, columns } = useGapsTable();
+
   return (
     <section className="p-[48px]">
       <Card>
