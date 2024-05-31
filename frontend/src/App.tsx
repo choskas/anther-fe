@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import {jwtDecode} from 'jwt-decode'
 import "./App.css";
 import { Button } from "./components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -19,7 +20,7 @@ import { useAuth } from "./context/Auth";
 
 function App() {
   const navigate = useNavigate();
-  const { setToken } = useAuth();
+  const { setToken, setUser } = useAuth();
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -31,7 +32,9 @@ function App() {
   function onSubmit(values: z.infer<typeof loginSchema>) {
     const {user, password} = values
     if (user === 'admin' && password === 'admin') {
-      setToken("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE3MTcwNDU2MDEsImV4cCI6MTc0ODU4MTYwMSwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.jKBmEWciNeLMiFhRtsSWC3u7e2jakAI29aownkdTs5o");
+      const tokenEx = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE3MTcxMjYzNzIsImV4cCI6MTc0ODY2MjM3MiwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIm5hbWUiOiJKb2hubnkiLCJsYXN0X25hbWUiOiJSb2NrZXQiLCJlbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXSwiaWQiOiIxIn0.x_ebHbahpWgo_eTKPmMQEZn-IhglR3gph5rp_cIBISs"
+      setToken(tokenEx);
+      setUser(jwtDecode(tokenEx));
       navigate("/dashboard", { replace: true });
     }
     console.log(values);

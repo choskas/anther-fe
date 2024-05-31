@@ -8,18 +8,22 @@ import {
   useEffect,
   useState,
 } from "react";
+import { IUser } from "./types";
 
 
 const AuthContext = createContext<{
   token: string | null;
   setToken: Dispatch<SetStateAction<string | null>>;
-}>({ token: null, setToken: () => {} });
+  user: IUser | null;
+  setUser: Dispatch<SetStateAction<IUser | null>>;
+}>({ token: null, setToken: () => {}, user: null, setUser: () => {}});
 
 const AuthProvider = ({ children }: {children: React.ReactNode}) => {
   const [token, setToken] = useState<string | null>(
     localStorage.getItem("token")
   );
-
+  const [user, setUser] = useState<IUser | null>(localStorage.getItem("token") ? jwtDecode(localStorage.getItem("token") as string) : null);
+console.log(user)
   useEffect(() => {
     if (token) {
       axiosProtected.defaults.headers.common["Authorization"] =
@@ -32,7 +36,7 @@ const AuthProvider = ({ children }: {children: React.ReactNode}) => {
   }, [token]);
 
   return (
-    <AuthContext.Provider value={{ token, setToken }}>
+    <AuthContext.Provider value={{ token, setToken, user, setUser }}>
       {children}
     </AuthContext.Provider>
   );

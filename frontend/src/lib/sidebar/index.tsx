@@ -27,7 +27,7 @@ export const SIDEBAR = [
   },
   {
     name: "Cerrar sesión",
-    linkTo: "/logout",
+    linkTo: "/dashboard/logout",
     roles: ["super_admin", "operative_admin", "product_generator"],
     icon:  <LogOutIcon className="h-4 w-4 mr-[8px]" />
   },

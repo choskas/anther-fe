@@ -4,7 +4,7 @@ import { Link, Outlet } from "react-router-dom"
 
 const Layout = () => {
     return (
-        <div className="flex flex-col md:flex-row h-[90vh]">
+        <div className="flex flex-col md:flex-row h-[100vh]">
         <nav className="md:w-[200px] border-solid border-r-[1px] md:h-full flex md:flex-col flex-row">
         <Link to="/">
             <img

@@ -1,15 +1,16 @@
 import { useAuth } from "@/context/Auth";
+import { axiosProtected } from "@/lib/axios";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const Logout = () => {
-    const navigate = useNavigate();
-    const {setToken} = useAuth()
-    useEffect(() => {
-        setToken(null)
-        navigate('/', {replace: true})
-    })
-    return <div>Logout</div>;
-}
+  const { setToken } = useAuth();
+  useEffect(() => {
+    setToken(null);
+    delete axiosProtected.defaults.headers.common["Authorization"];
+    localStorage.removeItem("token");
+  });
+  return <Navigate to="/dashboard" />;
+};
 
 export default Logout;

@@ -3,17 +3,21 @@ import { useAuth } from "@/context/Auth";
 import Dashboard from "@/pages/Dashboard";
 import Layout from "@/pages/Layout";
 import Logout from "@/pages/Logout";
-import { Navigate, RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
 
 export const ProtectedRoute = () => {
-    const { token } = useAuth();
-  
-    if (!token) {
-      return <Navigate to="/" />;
-    }
-  
-    return <Layout />;
-  };
+  const { token } = useAuth();
+
+  if (!token) {
+    return <Navigate to="/" />;
+  }
+
+  return <Layout />;
+};
 
 const Routes = () => {
   const { token } = useAuth();
@@ -29,11 +33,10 @@ const Routes = () => {
     },
   ];
 
-
   const routesForAuthenticatedOnly = [
     {
-      path: "/",
-      element: <ProtectedRoute />, 
+      path: "/dashboard",
+      element: <ProtectedRoute />,
       children: [
         {
           path: "/dashboard",
@@ -44,15 +47,15 @@ const Routes = () => {
           element: <div>Mi cuenta</div>,
         },
         {
-            path: "/dashboard/flights",
-            element: <div>vuelos</div>,
-          },
-          {
-            path: "/dashboard/downloads",
-            element: <div>Descargas</div>,
-          },
+          path: "/dashboard/flights",
+          element: <div>vuelos</div>,
+        },
         {
-          path: "/logout",
+          path: "/dashboard/downloads",
+          element: <div>Descargas</div>,
+        },
+        {
+          path: "/dashboard/logout",
           element: <Logout />,
         },
       ],
