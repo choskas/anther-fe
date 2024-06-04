@@ -2,26 +2,31 @@ import { DataTable } from '@/components/commons/data-table'
 import useGapsTable from '@/components/dashboard/tables/hooks/useGapsTable'
 import { Card, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { useEffect, useState } from 'react'
 
+import { useQuery } from '@tanstack/react-query'
+
+import { api } from '@/lib/api'
+
+async function getAllStudents() {
+  const res = await api.students.$get()
+  if (!res.ok) {
+    throw new Error('server error')
+  }
+  const data = await res.json()
+  return data.students[0]
+}
 export default function Dashboard() {
-  const [user, setUser] = useState()
   const { table, columns } = useGapsTable()
-
-  useEffect(() => {
-    async function fetchUser() {
-      const res = await fetch('/api/students/1')
-      const data = await res.json()
-      setUser(data)
-    }
-    fetchUser()
-  }, [])
+  const { isPending, error, data, isFetching } = useQuery({
+    queryKey: ['get-all-students'],
+    queryFn: getAllStudents
+  })
 
   return (
     <section className='p-[48px]'>
       <Card>
         <CardHeader className='font-light'>
-          Saldo en caja <p className='font-bold'>{user ? user.credit : '20'}</p>
+          Saldo en caja <p className='font-bold'>{data?.credit}</p>
         </CardHeader>
       </Card>
       <Tabs defaultValue='news' className='w-full mt-[24px]'>

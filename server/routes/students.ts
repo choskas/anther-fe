@@ -67,7 +67,6 @@ export const studentsRoute = new Hono()
   })
   .get('/:id{[0-9]+}', (c) => {
     const id = Number.parseInt(c.req.param('id'))
-
     const student = fakeStudents.find((student) => student.id === id)
     if (!student) {
       return c.notFound()
