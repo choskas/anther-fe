@@ -1,4 +1,4 @@
-import { AreaChartIcon, DownloadCloudIcon, LogOutIcon, PlaneIcon, UserIcon } from "lucide-react";
+import { AreaChartIcon, BookAIcon, DownloadCloudIcon, LogOutIcon, PlaneIcon, UserIcon } from "lucide-react";
 
 export const SIDEBAR = [
   {
@@ -24,6 +24,12 @@ export const SIDEBAR = [
     linkTo: "/dashboard/downloads",
     roles: ["super_admin"],
     icon:  <DownloadCloudIcon className="h-4 w-4 mr-[8px]" />
+  },
+  {
+    name: "Alumnos",
+    linkTo: "/dashboard/students",
+    roles: ["super_admin", "teacher"],
+    icon:  <BookAIcon className="h-4 w-4 mr-[8px]" />
   },
   {
     name: "Cerrar sesión",

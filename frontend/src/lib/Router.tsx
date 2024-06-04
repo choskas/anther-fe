@@ -3,6 +3,8 @@ import { useAuth } from "@/context/Auth";
 import Dashboard from "@/pages/Dashboard";
 import Layout from "@/pages/Layout";
 import Logout from "@/pages/Logout";
+import Students from "@/pages/Students";
+import path from "path";
 import {
   Navigate,
   RouterProvider,
@@ -35,6 +37,10 @@ const Routes = () => {
 
   const routesForAuthenticatedOnly = [
     {
+      path: "/",
+      element: <Navigate to="/dashboard" />,
+    },
+    {
       path: "/dashboard",
       element: <ProtectedRoute />,
       children: [
@@ -53,6 +59,10 @@ const Routes = () => {
         {
           path: "/dashboard/downloads",
           element: <div>Descargas</div>,
+        },
+        {
+          path: "/dashboard/students",
+          element: <Students />,
         },
         {
           path: "/dashboard/logout",
