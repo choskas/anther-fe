@@ -4,20 +4,25 @@ import { Card, CardTitle } from '@/components/ui/card'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { useEffect, useState } from 'react'
 
+import { useQuery } from '@tanstack/react-query'
+
+import { api } from '@/lib/api'
+
+async function getAllStudents() {
+  const res = await api.students.$get()
+  if (!res.ok) {
+    throw new Error('server error')
+  }
+  const data = await res.json()
+  return data.students[0]
+}
 export default function Dashboard() {
-  const [user, setUser] = useState()
   const { table, columns } = useGapsTable()
-
-  useEffect(() => {
-    async function fetchUser() {
-      const res = await fetch('/api/students/1')
-      const data = await res.json()
-      setUser(data)
-    }
-    fetchUser()
-  }, [])
+  const { isPending, error, data, isFetching } = useQuery({
+    queryKey: ['get-all-students'],
+    queryFn: getAllStudents
+  })
 
   return (
     <section className="p-[48px] flex">
@@ -25,7 +30,7 @@ export default function Dashboard() {
       <Card>
         <section className="font-light flex justify-between p-[24px]">
           <div>
-            <h2 className="text-[18px]">¡Hola {user?.name}!</h2>
+            <h2 className="text-[18px]">¡Hola !</h2>
             <p>Bienvenid@ de nuevo a Anther</p>
           </div>
           <div>
